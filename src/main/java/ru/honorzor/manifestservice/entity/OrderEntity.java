@@ -28,7 +28,6 @@ public class OrderEntity {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
     )
-    @Column(name = "products")
     @ToString.Exclude
     public List<ProductEntity> products;
 

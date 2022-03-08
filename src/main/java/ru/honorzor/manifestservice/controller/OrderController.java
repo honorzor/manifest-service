@@ -2,7 +2,6 @@ package ru.honorzor.manifestservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.asm.Advice;
 import org.springframework.web.bind.annotation.*;
 import ru.honorzor.manifestservice.dto.OrderDTO;
 import ru.honorzor.manifestservice.service.OrderService;
@@ -13,7 +12,7 @@ import java.util.Optional;
 @RequestMapping(value = "/api/v1/order")
 @RequiredArgsConstructor
 @Slf4j
-public class OrderController extends AdviceOrderController {
+public class OrderController {
     private final OrderService orderService;
 
     @PostMapping
@@ -37,5 +36,4 @@ public class OrderController extends AdviceOrderController {
         orderService.finishOrder(id);
         log.info("Order with id ended: {}", id);
     }
-
 }

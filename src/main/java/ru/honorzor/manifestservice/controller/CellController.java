@@ -21,13 +21,13 @@ public class CellController {
 
     @PostMapping(value = "/minus")
     public Optional<CellDTO> minus(@RequestBody CellDTO cellDTO) {
-        log.info("request for minus: {}", cellDTO);
+        log.info("request for minus count: {}", cellDTO);
         return cellService.minusCountFromCell(cellDTO);
     }
 
     @PostMapping(value = "/add")
     public Optional<CellDTO> add(@RequestBody CellDTO cellDTO) {
-        log.info("request for add: {}", cellDTO);
+        log.info("request for add count: {}", cellDTO);
         return cellService.addCountInCell(cellDTO);
     }
 
@@ -35,6 +35,4 @@ public class CellController {
     public void createCell(@RequestBody CellEntity cellEntity) {
         cellService.save(cellEntity);
     }
-
-
 }
