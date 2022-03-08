@@ -18,11 +18,9 @@ public class CellEntity {
             generator = "cell_id_Sequence")
     @SequenceGenerator(name = "cell_id_Sequence",
             sequenceName = "SEQ_CELL_ID", allocationSize = 1)
-    @Column(name = "cell_id")
     private Long id;
 
     private Long code;
 
     private Long count;
-
 }

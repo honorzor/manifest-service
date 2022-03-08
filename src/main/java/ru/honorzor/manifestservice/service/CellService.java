@@ -26,7 +26,7 @@ public class CellService {
 
     @Transactional
     public Optional<CellDTO> minusCountFromCell(CellDTO cellDTO) {
-        final Optional<CellEntity> cell = cellRepository.findById(cellDTO.getCell_id());
+        final Optional<CellEntity> cell = cellRepository.findById(cellDTO.getId());
         if (cell.isPresent()) {
             final CellEntity cellEntity = cell.get();
             if (!Objects.equals(cellEntity.getCode(), cellDTO.getCode())) {
@@ -51,7 +51,7 @@ public class CellService {
 
     @Transactional
     public Optional<CellDTO> addCountInCell(CellDTO cellDTO) {
-        final Optional<CellEntity> cellEntity = cellRepository.findById(cellDTO.getCell_id());
+        final Optional<CellEntity> cellEntity = cellRepository.findById(cellDTO.getId());
         if (cellEntity.isPresent()) {
             final CellEntity cell = cellEntity.get();
             if (!Objects.equals(cell.getCode(), cellDTO.getCode())) {

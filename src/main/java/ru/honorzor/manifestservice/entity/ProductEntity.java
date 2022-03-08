@@ -20,10 +20,6 @@ public class ProductEntity {
     @Column(name = "product_id")
     private Long id;
 
-    private String name;
-
-    private String description;
-
     private Long code;
 
     private Long count;
@@ -31,5 +27,4 @@ public class ProductEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private OrderEntity orderEntity;
-
 }
