@@ -27,11 +27,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    implementation 'org.projectlombok:lombok:1.18.20'
+
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
+
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testImplementation "org.testcontainers:mysql:1.16.3"
+    testImplementation "org.testcontainers:junit-jupiter:1.16.3"
 }
 
 tasks.named('test') {
