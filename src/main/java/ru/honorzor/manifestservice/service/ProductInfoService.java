@@ -18,8 +18,8 @@ public class ProductInfoService {
     @Transactional
     public Optional<ProductInfoEntity> getProductInfoByCode(Long code) {
         final Optional<ProductInfoEntity> productInfoEntity = productInfoRepository.findFirstByCode(code);
-        if (productInfoEntity.isPresent()){
-            log.info("ProductInfo entity by code {} , body {}",code,productInfoEntity);
+        if (productInfoEntity.isPresent()) {
+            log.info("ProductInfo entity by code {} , body {}", code, productInfoEntity);
             return productInfoEntity;
         }
         return Optional.empty();

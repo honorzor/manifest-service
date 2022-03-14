@@ -20,11 +20,6 @@ public class CellService {
     private final CellMapper cellMapper;
 
     @Transactional
-    public void save(CellEntity cellEntity) {
-        cellRepository.save(cellEntity);
-    }
-
-    @Transactional
     public Optional<CellDTO> minusCountFromCell(CellDTO cellDTO) {
         final Optional<CellEntity> cell = cellRepository.findById(cellDTO.getId());
         if (cell.isPresent()) {
@@ -37,16 +32,11 @@ public class CellService {
             }
             log.info("Cell: {} before minus count: {}", cellEntity.getId(), cellEntity.getCount());
             cellEntity.setCount(cellEntity.getCount() - cellDTO.getCount());
-            updateCount(cellEntity);
+            save(cellEntity);
             log.info("Cell: {} after minus count: {}", cellEntity.getId(), cellEntity.getCount());
             return Optional.of(cellMapper.toDTO(cellEntity));
         }
         return Optional.empty();
-    }
-
-    @Transactional
-    public void updateCount(CellEntity cellEntity) {
-        cellRepository.save(cellEntity);
     }
 
     @Transactional
@@ -59,7 +49,7 @@ public class CellService {
             }
             log.info("Cell: {} before plus count: {}", cell.getId(), cell.getCount());
             cell.setCount(cell.getCount() + cellDTO.getCount());
-            updateCount(cell);
+            save(cell);
             log.info("Cell: {} after plus count: {}", cell.getId(), cell.getCount());
             return Optional.of(cellMapper.toDTO(cell));
         }
@@ -69,5 +59,10 @@ public class CellService {
     @Transactional
     public Long getCellIdByCode(Long code) {
         return cellRepository.getCellIdByCode(code);
+    }
+
+    @Transactional
+    public void save(CellEntity cellEntity) {
+        cellRepository.save(cellEntity);
     }
 }

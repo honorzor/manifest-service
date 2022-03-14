@@ -50,24 +50,6 @@ public class OrderService {
         }
         return Optional.empty();
     }
-//    @Transactional
-//    public Optional<OrderDTO> getOrder() {
-//        return orderRepository.findFirstByOrderState(OrderState.FREE)
-//                .map(orderEntity -> {
-//                    orderEntity.setOrderState(OrderState.ACTIVE);
-//                    final List<ProductEntity> products = orderEntity.getProducts();
-//                    final List<ProductDTO> productDTOS = productMapper.toDTO(products);
-//                    productDTOS.forEach(x -> x.setCellId(cellService.getCellIdByCode(x.getCode())));
-//                    return Pair.of(orderEntity.getId(), productDTOS);
-//                })
-//                .map(pair -> {
-//                    final OrderDTO orderDTO = OrderDTO.builder()
-//                            .products(pair.getSecond())
-//                            .build();
-//                    log.info("order picking started id: {} ,body: {}", pair.getFirst(), orderDTO);
-//                    return orderDTO;
-//                });
-//    }
 
     @Transactional
     public Optional<OrderDTO> getOrder() {
