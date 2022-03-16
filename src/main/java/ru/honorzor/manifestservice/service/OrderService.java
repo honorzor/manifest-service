@@ -9,6 +9,7 @@ import ru.honorzor.manifestservice.entity.OrderEntity;
 import ru.honorzor.manifestservice.entity.ProductEntity;
 import ru.honorzor.manifestservice.entity.ProductInfoEntity;
 import ru.honorzor.manifestservice.enums.OrderState;
+import ru.honorzor.manifestservice.exception.order.CannotFinishOrderException;
 import ru.honorzor.manifestservice.mapper.ProductMapper;
 import ru.honorzor.manifestservice.repository.OrderRepository;
 
@@ -85,7 +86,7 @@ public class OrderService {
         if (orderEntity.isPresent()) {
             final OrderEntity order = orderEntity.get();
             if (order.getOrderState() == OrderState.FREE) {
-                throw new RuntimeException(String.format("You cannot finished this order, because order have state = %s", order.getOrderState()));
+                throw new CannotFinishOrderException(String.format("You cannot finish this order, because order have state = %s", order.getOrderState()));
             }
             order.setOrderState(OrderState.FINISHED);
             orderRepository.save(order);

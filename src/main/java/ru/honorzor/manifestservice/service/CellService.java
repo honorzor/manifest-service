@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.honorzor.manifestservice.dto.CellDTO;
 import ru.honorzor.manifestservice.entity.CellEntity;
+import ru.honorzor.manifestservice.exception.cell.NotEnoughCountException;
+import ru.honorzor.manifestservice.exception.cell.NotEqualCodeException;
 import ru.honorzor.manifestservice.mapper.CellMapper;
 import ru.honorzor.manifestservice.repository.CellRepository;
 
@@ -25,10 +27,10 @@ public class CellService {
         if (cell.isPresent()) {
             final CellEntity cellEntity = cell.get();
             if (!Objects.equals(cellEntity.getCode(), cellDTO.getCode())) {
-                throw new RuntimeException("You cannot minus count, please check your code");
+                throw new NotEqualCodeException("your code not equal code in cell, try again");
             }
             if (cellEntity.getCount() < cellDTO.getCount()) {
-                throw new RuntimeException("Need add count of product in cell");
+                throw new NotEnoughCountException("You cannot get count greater than in cell, try again");
             }
             log.info("Cell: {} before minus count: {}", cellEntity.getId(), cellEntity.getCount());
             cellEntity.setCount(cellEntity.getCount() - cellDTO.getCount());
@@ -45,7 +47,7 @@ public class CellService {
         if (cellEntity.isPresent()) {
             final CellEntity cell = cellEntity.get();
             if (!Objects.equals(cell.getCode(), cellDTO.getCode())) {
-                throw new RuntimeException("You cannot add new item in current cell, please check your code");
+                throw new NotEqualCodeException("your code not equal code in cell, try again");
             }
             log.info("Cell: {} before plus count: {}", cell.getId(), cell.getCount());
             cell.setCount(cell.getCount() + cellDTO.getCount());
