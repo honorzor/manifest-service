@@ -1,6 +1,7 @@
 package ru.honorzor.manifestservice.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @ActiveProfiles("test")
 @ExtendWith(value = SpringExtension.class)
+@Disabled
 public class CellServiceTest extends TestWithMysqlContainer {
 
     @Autowired
