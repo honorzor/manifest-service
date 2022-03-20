@@ -60,13 +60,13 @@ public class OrderService {
 
             final List<ProductDTO> product = productMapper.toDTO(order.getProducts())
                     .stream().peek(setInfo -> {
-                        Long cellId = cellService.getCellIdByCode(setInfo.getCode());
-                        Optional<ProductInfoEntity> productInfoEntity =
+                        final Long cellId = cellService.getCellIdByCode(setInfo.getCode());
+                        final Optional<ProductInfoEntity> productInfoEntity =
                                 productInfoService.getProductInfoByCode(setInfo.getCode());
 
                         setInfo.setCellId(cellId);
-                        setInfo.setName(productInfoEntity.get().getName());
-                        setInfo.setDescription(productInfoEntity.get().getDescription());
+                        setInfo.setName(productInfoEntity.map(ProductInfoEntity::getName).orElse(null));
+                        setInfo.setDescription(productInfoEntity.map(ProductInfoEntity::getDescription).orElse(null));
                     }).collect(Collectors.toList());
 
             final OrderDTO orderDTO = OrderDTO.builder().products(product).build();
