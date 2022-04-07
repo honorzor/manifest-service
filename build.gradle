@@ -20,14 +20,18 @@ repositories {
 
 ext {
     mapstructVersion = "1.4.2.Final"
+    mysqlConnector = "8.0.22"
+    lombok = "1.18.20"
+    testContainersMysql = "1.16.3"
+    testContainersJunit = "1.16.3"
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
+    implementation "mysql:mysql-connector-java:${mysqlConnector}"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-    implementation 'org.projectlombok:lombok:1.18.20'
+    implementation "org.projectlombok:lombok:${lombok}"
 
     compileOnly 'org.projectlombok:lombok'
 
@@ -35,9 +39,8 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-    testImplementation "org.testcontainers:mysql:1.16.3"
-    testImplementation "org.testcontainers:junit-jupiter:1.16.3"
+    testImplementation "org.testcontainers:mysql:${testContainersMysql}"
+    testImplementation "org.testcontainers:junit-jupiter:${testContainersJunit}"
 }
 
 tasks.named('test') {

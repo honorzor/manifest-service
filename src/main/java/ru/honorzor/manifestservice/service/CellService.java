@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.honorzor.manifestservice.dto.CellDTO;
 import ru.honorzor.manifestservice.entity.CellEntity;
+import ru.honorzor.manifestservice.enums.CellState;
 import ru.honorzor.manifestservice.exception.cell.NotEnoughCountException;
 import ru.honorzor.manifestservice.exception.cell.NotEqualCodeException;
 import ru.honorzor.manifestservice.mapper.CellMapper;
@@ -34,6 +35,12 @@ public class CellService {
             }
             log.info("Cell: {} before minus count: {}", cellEntity.getId(), cellEntity.getCount());
             cellEntity.setCount(cellEntity.getCount() - cellDTO.getCount());
+
+            if (cellEntity.getCount() == 0) {
+                cellEntity.setCellState(CellState.EMPTY);
+                cellEntity.setCode(0L);
+            }
+
             save(cellEntity);
             log.info("Cell: {} after minus count: {}", cellEntity.getId(), cellEntity.getCount());
             return Optional.of(cellMapper.toDTO(cellEntity));
@@ -66,5 +73,16 @@ public class CellService {
     @Transactional
     public void save(CellEntity cellEntity) {
         cellRepository.save(cellEntity);
+    }
+
+    @Transactional
+    public String createCell(CellDTO cellDTO) {
+        final CellEntity cellEntity = CellEntity.builder()
+                .code(cellDTO.getCode())
+                .count(cellDTO.getCount())
+                .build();
+        cellRepository.save(cellEntity);
+        log.info("cell save");
+        return "cell is created";
     }
 }

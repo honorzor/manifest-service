@@ -2,12 +2,8 @@ package ru.honorzor.manifestservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.honorzor.manifestservice.dto.CellDTO;
-import ru.honorzor.manifestservice.entity.CellEntity;
 import ru.honorzor.manifestservice.service.CellService;
 
 import java.util.Optional;
@@ -32,7 +28,13 @@ public class CellController {
     }
 
     @PostMapping(value = "/create")
-    public void createCell(@RequestBody CellEntity cellEntity) {
-        cellService.save(cellEntity);
+    public String createCell(@RequestBody CellDTO cellDTO) {
+        log.info("request for create cell: {}", cellDTO);
+        return cellService.createCell(cellDTO);
+    }
+
+    @GetMapping("/getCellIdByCode/{code}")
+    public Optional<Long> getCellIdByCode(@PathVariable Long code) {
+        return Optional.ofNullable(cellService.getCellIdByCode(code));
     }
 }

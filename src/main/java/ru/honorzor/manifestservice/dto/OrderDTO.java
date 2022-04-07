@@ -13,6 +13,8 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class OrderDTO {
+    private Long orderId;
+
     @JsonProperty(namespace = "products")
     private List<ProductDTO> products;
 }

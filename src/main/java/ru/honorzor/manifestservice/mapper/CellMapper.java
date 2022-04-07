@@ -11,4 +11,6 @@ public interface CellMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     CellDTO toDTO(CellEntity cellEntity);
+
+    CellEntity toEntities(CellDTO cellDTO);
 }

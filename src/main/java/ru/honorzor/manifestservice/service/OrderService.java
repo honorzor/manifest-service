@@ -44,7 +44,11 @@ public class OrderService {
             final OrderEntity order = orderEntity.get();
             final List<ProductDTO> productDTOS = productMapper.toDTO(order.getProducts());
 
-            final OrderDTO orderDTO = OrderDTO.builder().products(productDTOS).build();
+            final OrderDTO orderDTO = OrderDTO.builder()
+                    .orderId(order.getId())
+                    .products(productDTOS)
+                    .build();
+
             log.info("get order with id: {} , body: {}", order.getId(), orderDTO.getProducts());
 
             return Optional.of(orderDTO);
@@ -69,7 +73,10 @@ public class OrderService {
                         setInfo.setDescription(productInfoEntity.map(ProductInfoEntity::getDescription).orElse(null));
                     }).collect(Collectors.toList());
 
-            final OrderDTO orderDTO = OrderDTO.builder().products(product).build();
+            final OrderDTO orderDTO = OrderDTO.builder()
+                    .orderId(order.getId())
+                    .products(product)
+                    .build();
 
             order.setOrderState(OrderState.ACTIVE);
 

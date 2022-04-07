@@ -1,6 +1,9 @@
 package ru.honorzor.manifestservice.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -8,5 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 public class ResponseDTO {
     public String message;
+
     private int code;
 }

@@ -1,6 +1,7 @@
 package ru.honorzor.manifestservice.entity;
 
 import lombok.*;
+import ru.honorzor.manifestservice.enums.CellState;
 
 import javax.persistence.*;
 
@@ -23,4 +24,8 @@ public class CellEntity {
     private Long code;
 
     private Long count;
+
+    @Enumerated(value = EnumType.STRING)
+    @Builder.Default
+    private CellState cellState = CellState.BUSY;
 }
