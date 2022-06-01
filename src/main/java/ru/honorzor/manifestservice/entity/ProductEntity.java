@@ -24,7 +24,7 @@ public class ProductEntity {
 
     private Long count;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "order_id")
     private OrderEntity orderEntity;
 }

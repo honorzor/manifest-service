@@ -25,10 +25,9 @@ public class OrderEntity {
 
     @OneToMany(
             mappedBy = "orderEntity",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true
     )
-    @ToString.Exclude
     public List<ProductEntity> products;
 
     @Column(name = "order_state")

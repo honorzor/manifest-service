@@ -12,10 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class OrderDTO {
-    @JsonProperty("orderId")
-    private Long orderId;
-
-    @JsonProperty(namespace = "products")
-    private List<ProductDTO> products;
+public class RequestDTO {
+    @JsonProperty("code")
+    private List<Long> code;
 }
